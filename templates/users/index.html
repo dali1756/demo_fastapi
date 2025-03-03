@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}使用者列表{% endblock %}
+{% block content %}
+<h1>使用者列表</h1>
+    <a href="/users/new">新增使用者</a>
+    <table>
+        <tr>
+            <th>頭像</th>
+            <th>ID</th>
+            <th>名稱</th>
+            <th>Email</th>
+            <th>操作</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>
+                {% if user.avatar_url %}
+                    <img src="{{ user.avatar_url }}" alt="Avatar" style="width: 50px; height: 50px;">
+                {% else %}
+                    無頭像
+                {% endif %}
+            </td>
+            <td>{{ user.id }}</td>
+            <td><a href="/users/{{ user.id }}">{{ user.name }}</a></td>
+            <td>{{ user.email }}</td>
+            <td>
+                <a href="/users/{{ user.id }}/edit">編輯使用者資料</a>
+                <form style="display: inline;" method="post" action="/users/{{ user.id }}/delete" onsubmit="return confirm('確定要刪除嗎？')">
+                    <button type="submit">刪除</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}編輯使用者{% endblock %}
+{% block content %}
+<h1>編輯使用者</h1>
+    <form method="post">
+        <p>
+            <label>名稱：</label>
+            <input type="text" name="name" value="{{ user.name }}" required>
+        </p>
+        <p>
+            <label>Email：</label>
+            <input type="email" name="email" value="{{ user.email }}" required>
+        </p>
+        <p>
+            <label>密碼：</label>
+            <input type="password" name="password" value="{{ user.password }}" required>
+        </p>
+        <button type="submit">更新</button>
+        <a href="/">返回</a>
+    </form>
+{% endblock %}

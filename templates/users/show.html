@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}使用者資料{% endblock %}
+{% block content %}
+<h1>使用者資料</h1>
+    <div>
+        {% if user.avatar_url %}
+            <img src="{{ user.avatar_url }}" alt="user avatar" style="width: 150px; height: 150px;">
+        {% else %}
+            <p>未上傳頭像</p>
+        {% endif %}
+        <form id="avatarForm" enctype="multipart/form-data" data-user-id="{{ user.id }}">
+            <input type="file" id="avatarInput" name="file" accept="image/*">
+            <button type="submit">上傳頭像</button>
+        </form>
+    </div>
+    <p><strong>ID：</strong> {{ user.id }}</p>
+    <p><strong>名稱：</strong> {{ user.name }}</p>
+    <p><strong>Email：</strong> {{ user.email }}</p>
+    <a href="/users/{{ user.id }}/edit">編輯</a>
+    <form style="display: inline;" method="post" action="/users/{{ user.id }}/delete" onsubmit="return confirm('確定要刪除嗎？')">
+        <button type="submit">刪除</button>
+    </form>
+    <br>
+    <a href="/users">返回列表</a>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='/js/avatar.js') }}"></script>
+{% endblock %}
